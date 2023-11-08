@@ -1,0 +1,105 @@
+@use "./breakpoints.scss" as breakpoints;
+@import "theme.scss";
+
+
+.task-card {
+    background: $white;
+    box-shadow: 0px 6px 58px 0px rgba(196, 203, 214, 0.11);
+    border-radius: 24px;
+    padding: 19px 30px 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    @include breakpoints.devices(sm) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 19px 30px 25px;
+    }
+  }
+  
+  .task-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: $secondary-color;
+    margin-bottom: 8px;
+    line-height: 14px;
+    margin-top: 1px;
+    @include breakpoints.devices(sm) {
+        margin-top: 2px;
+    }
+  }
+  
+  .task {
+    min-height: 20px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: $primary-color;
+  }
+  
+  .priority-title {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 14px;
+    color: $secondary-color;
+    margin-bottom: 7px;
+    @include breakpoints.devices(sm) {
+      margin-top: 13px;
+    }
+  }
+  
+  .priority {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    color: $success-color;
+    text-transform: capitalize;
+  }
+  .high-priority {
+    color: $error-color;
+  }
+  .medium-priority {
+    color: $warning-color;
+  }
+  .low-priority {
+    color: $success-color;
+  }
+  
+  .task-status-wrapper {
+    margin-top: 4px;
+    width: 100px;
+    text-align: center;
+    @include breakpoints.devices(sm) {
+      margin-top: 18px;
+      text-align: left;
+    }
+  }
+  
+  .status {
+    background: rgba(124, 133, 146, 0.14);
+    border-radius: 8px;
+    padding: 7px 14px;
+    color: $gray;
+    font-weight: 400;
+    font-size: 12px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .progress {
+    margin-top: 4px;
+    @include breakpoints.devices(sm) {
+      margin-top: 15px;
+    }
+  }
+  
+  .actions {
+    margin-top: 4px;
+    height: 22px;
+    @include breakpoints.devices(sm) {
+      margin-top: 15px;
+    }
+  }
+  

@@ -1,0 +1,126 @@
+@import "theme.scss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f2f5;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 720px;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.page-wrapper {
+  margin: 50px 0;
+}
+
+.top-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    width: 161px;
+    font-weight: 600;
+    font-size: 36px;
+    color: $primary-color;
+    line-height: 36px;
+  }
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.task-container {
+  margin-top: 40px;
+}
+
+.flex {
+  margin-top: -1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flx-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flx-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.cp {
+  cursor: pointer;
+}
+
+.w-100 {
+  width: 170px;
+}
+
+#add_task{
+  font-weight: 700;
+  line-height: normal;
+  font-family: Arial;
+  border: none;
+  padding: 13px 30px;
+}
+.button {
+  font-family: 'Poppins';
+  background: $tertiary-color;
+  border-radius: 10px;
+  padding: 12px 30px;
+  outline: none;
+  border: 1px solid #7D8592;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #ffffff;
+  &:disabled {
+    background-color: $gray;
+    cursor: not-allowed;
+  }
+  &.outline {
+    background: #ffffff;
+    border: 1px solid #d8e0f0;
+    box-shadow: 0px 1px 2px rgba(184, 200, 224, 0.222055);
+    font-weight: 500;
+    color: #7d8592;
+  }
+  .icon {
+    margin-right: 12px;
+    font-size: 0.6px;
+  }
+}
+
+.circular-progressbar {
+  display: block;
+  margin: 0 auto;
+}
+
+.circle-background {
+  fill: none;
+  stroke: #e5e6e9;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: #713fff;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
