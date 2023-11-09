@@ -320,7 +320,6 @@ function getSelectedPriority() {
   }
 }
 
-// Xử lý sự kiện default của form khi người dùng nhấn nút "Add Task"
 taskForm.addEventListener("submit", function (event) {
   event.preventDefault();
   addTask();
@@ -332,9 +331,22 @@ function closeAddTaskModal() {
 }
 add_btn.addEventListener("click", () => {
   add_modal.style.display = "block";
+  const priorityButtons = document.querySelectorAll(".priority-buttons li");
+  for (const button of priorityButtons) {
+    if (button.classList.contains("low-selected")) {
+      button.classList.remove("low-selected");
+    }
+  }
+  priorityButtons[2].classList.add("low-selected");
+  
 });
 
-close_add_modal.addEventListener("click", closeAddTaskModal);
+
+close_add_modal.addEventListener("click", () => {
+  taskTitleInput.value = "";
+  closeAddTaskModal();
+});
+
 add_modal.addEventListener("click", closeAddTaskModal);
 modal_content.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -348,7 +360,22 @@ const edit_modal = document.getElementById("edit_todo_task");
 const close_edit_modal = document.getElementById("close_edit_modal");
 const edit_task_img = document.querySelectorAll(".img-edit-task");
 const edit_task_form = document.getElementById("edit_task_form");
-let editingTaskId = null; 
+btn_edit_task = document.querySelector(".button-edit-task");
+let editingTaskId = null;
+
+// Xử lí nếu input trong edit modal trống thì nút "Edit Task" sẽ bị disable
+const editTitleInput = document.querySelector(
+  "#edit_todo_task input[name='title']"
+);
+editTitleInput.addEventListener("input", () => {
+  const taskTitle = editTitleInput.value.trim();
+  if (taskTitle !== "") {
+    btn_edit_task.disabled = false;
+  } else {
+    btn_edit_task.disabled = true;
+  }
+});
+
 
 for (const img_edit of edit_task_img) {
   img_edit.addEventListener("click", (event) => {
@@ -484,7 +511,6 @@ editButton.addEventListener("click", () => {
   );
 
   if (editTitleInput && editPrioritySelect) {
-    // alert("Task edited successfully!");
 
     const editedTitle = editTitleInput.value;
     const editedPriority = selectedPriorityElement.textContent;
