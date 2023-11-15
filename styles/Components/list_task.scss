@@ -70,7 +70,7 @@
   
   .task-status-wrapper {
     margin-top: 4px;
-    width: 100px;
+    // width: 100px;
     text-align: center;
     @include breakpoints.devices(sm) {
       margin-top: 18px;
@@ -78,18 +78,19 @@
     }
   }
   
-  // .done-status {
-  //   margin-left: 77px;
-  //   margin-right: 78px;
-  // }
-  // .todo-status {
-  //   margin-left: 76px;
-  //   margin-right: 76px;
-  // }
-  // .in-progress-status{
-  //   margin-left: 71px;
-  //   margin-right: 53px;
-  // }
+  .done-status {
+    margin-left: 77px;
+    margin-right: 78px;
+  }
+  .todo-status {
+    margin-left: 76px;
+    margin-right: 76px;
+  }
+  .in-progress-status{
+    margin-left: 66px;
+    margin-right: 53px;
+    min-width: max-content;
+  }
 
   .status {
     background: rgba(124, 133, 146, 0.14);

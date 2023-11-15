@@ -13,48 +13,48 @@ const TaskProgress = {
 };
 
 const taskList = [
-  {
-    id: "01",
-    title: "Go to gym",
-    priority: "high",
-    status: TaskStatus.TODO,
-    progress: TaskProgress.TODO,
-  },
-  {
-    id: "02",
-    title: "Read a book",
-    priority: "low",
-    status: TaskStatus.DONE,
-    progress: TaskProgress.DONE,
-  },
-  {
-    id: "03",
-    title: "Go to market",
-    priority: "medium",
-    status: TaskStatus.IN_PROGRESS,
-    progress: TaskProgress.IN_PROGRESS,
-  },
-  {
-    id: "04",
-    title: "Restart Learning Solidworks",
-    priority: "high",
-    status: TaskStatus.TODO,
-    progress: TaskProgress.TODO,
-  },
-  {
-    id: "05",
-    title: "change slider to scroll",
-    priority: "high",
-    status: TaskStatus.DONE,
-    progress: TaskProgress.DONE,
-  },
-  {
-    id: "06",
-    title: "To publish the article",
-    priority: "medium",
-    status: TaskStatus.IN_PROGRESS,
-    progress: TaskProgress.IN_PROGRESS,
-  },
+  // {
+  //   id: "01",
+  //   title: "Go to gym",
+  //   priority: "high",
+  //   status: TaskStatus.TODO,
+  //   progress: TaskProgress.TODO,
+  // },
+  // {
+  //   id: "02",
+  //   title: "Read a book",
+  //   priority: "low",
+  //   status: TaskStatus.DONE,
+  //   progress: TaskProgress.DONE,
+  // },
+  // {
+  //   id: "03",
+  //   title: "Go to market",
+  //   priority: "medium",
+  //   status: TaskStatus.IN_PROGRESS,
+  //   progress: TaskProgress.IN_PROGRESS,
+  // },
+  // {
+  //   id: "04",
+  //   title: "Restart Learning Solidworks",
+  //   priority: "high",
+  //   status: TaskStatus.TODO,
+  //   progress: TaskProgress.TODO,
+  // },
+  // {
+  //   id: "05",
+  //   title: "change slider to scroll",
+  //   priority: "high",
+  //   status: TaskStatus.DONE,
+  //   progress: TaskProgress.DONE,
+  // },
+  // {
+  //   id: "06",
+  //   title: "To publish the article",
+  //   priority: "medium",
+  //   status: TaskStatus.IN_PROGRESS,
+  //   progress: TaskProgress.IN_PROGRESS,
+  // },
 ];
 
 /* =========================================  ADD TASK MODAL ================================================================ */
@@ -274,7 +274,7 @@ function displayTask(task) {
       <span class="priority-title">Priority</span>
       <span class="${task.priority}-priority priority">${task.priority}</span>
     </div>
-    <div class="task-status-wrapper" [data-task-id="${task.id}"]>
+    <div class="task-status-wrapper ${getStatusClass(task.status)}" [data-task-id="${task.id}"]>
       <button class="status" onclick="changeStatus('${task.id}')">
         ${task.status}
       </button>
@@ -287,6 +287,18 @@ function displayTask(task) {
       <img src="./assets/images/img_delete_task.svg" onclick=showdelete() class="cp img-delete-task" id="${task.id}" data-task-id="${task.id}" alt="Delete Task">
     </div>
   `;
+  function getStatusClass(status) {
+    switch (status) {
+        case 'Done':
+            return 'done-status';
+        case 'To Do':
+            return 'todo-status';
+        case 'In Progress':
+            return 'in-progress-status';
+        default:
+            return ''; 
+    }
+}
   // Thêm task vào đầu danh sách
   taskContainer.insertBefore(taskElement, taskContainer.firstChild);
 }
@@ -295,14 +307,18 @@ function getSelectedPriority() {
   const priorityButtons = document.querySelectorAll(".priority-buttons li");
   for (const button of priorityButtons) {
     if (button.classList.contains("low-selected")) {
+      button.classList.remove("medium-selected");
+      button.classList.remove("high-selected");
       return "low";
     } else if (button.classList.contains("medium-selected")) {
+      button.classList.remove("low-selected");
+      button.classList.remove("high-selected");
       return "medium";
     } else if (button.classList.contains("high-selected")) {
+      button.classList.remove("low-selected");
+      button.classList.remove("medium-selected");
       return "high";
-    } else {
-      return "low";
-    }
+    } 
   }
 }
 
@@ -616,7 +632,6 @@ function changeStatus(taskId) {
       default:
         newStatus = TaskStatus.TODO;
     }
-    // Nếu status là done thì thêm class done-status
     const progressCircle = document.querySelector(
       `[data-task-id="${task.id}"]  .circle-progress`
     );
@@ -626,7 +641,6 @@ function changeStatus(taskId) {
     // cập nhật lại status của task
     task.status = newStatus;
 
-    // Khi status của người dùng thay đổi thì locals storage cũng thay đổi theo
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskIndex = tasks.findIndex((item) => item.id === taskId);
     if (taskIndex !== -1) {
@@ -638,20 +652,8 @@ function changeStatus(taskId) {
     const statusButton = document.querySelector(
       `[data-task-id="${taskId}"] .status`
     );
-    // const statusButtondiv = document.querySelector(`.task-status-wrapper[data-task-id="${taskId}"]`);
     if (statusButton) {
       statusButton.textContent = newStatus;
-      // Thêm class tương ứng với status
-      if(newStatus === TaskStatus.DONE) {
-        statusButton.classList.add("done-status");
-        statusButton.classList.remove("in-progress-status", "todo-status");
-      } else if (newStatus === TaskStatus.IN_PROGRESS) {
-        statusButton.classList.add("in-progress-status");
-        statusButton.classList.remove("done-status", "todo-status");
-      } else {
-        statusButton.classList.add("todo-status");
-        statusButton.classList.remove("in-progress-status", "done-status");
-      }
     }
   }
 }
