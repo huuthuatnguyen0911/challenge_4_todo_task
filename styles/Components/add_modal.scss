@@ -40,10 +40,10 @@
   .priority-buttons {
     list-style-type: none;
     display: flex;
-    gap: 13px;
+    gap: 12px;
     margin-top: 10px;
     @include breakpoints.devices(sm) {
-      gap: 10px;
+      gap: 12px;
     }
     li {
       border: 1px solid $warning-color;
@@ -94,6 +94,7 @@
       line-height: 22px;
     }
     input {
+      font-family: "Poppins";
       width: 100%;
       background: $white;
       border: 1px solid #d8e0f0;
@@ -105,6 +106,9 @@
       padding: 14px 18px;
       line-height: 22px;
       outline: none;
+      @include breakpoints.devices(sm) {
+        padding: 14px 12.68px;
+      }
     }
   }
   
