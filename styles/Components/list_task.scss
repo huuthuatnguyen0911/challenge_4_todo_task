@@ -19,6 +19,7 @@
   }
   
   .task-title {
+    // margin-right: 195px;
     font-size: 14px;
     font-weight: 400;
     color: $secondary-color;
@@ -36,6 +37,7 @@
     font-weight: 400;
     line-height: 19.2px;
     color: $primary-color;
+    overflow-wrap: break-word;
   }
   
   .priority-title {
@@ -76,6 +78,19 @@
     }
   }
   
+  // .done-status {
+  //   margin-left: 77px;
+  //   margin-right: 78px;
+  // }
+  // .todo-status {
+  //   margin-left: 76px;
+  //   margin-right: 76px;
+  // }
+  // .in-progress-status{
+  //   margin-left: 71px;
+  //   margin-right: 53px;
+  // }
+
   .status {
     background: rgba(124, 133, 146, 0.14);
     border-radius: 8px;
@@ -89,6 +104,7 @@
   }
   
   .progress {
+    margin-right: 57px;
     margin-top: 4px;
     @include breakpoints.devices(sm) {
       margin-top: 15px;

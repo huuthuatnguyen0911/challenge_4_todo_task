@@ -51,7 +51,7 @@ body {
 
 .flx-between {
   display: flex;
-  justify-content: space-between;
+  gap: 320px;
 }
 
 .flx-right {
@@ -77,6 +77,7 @@ body {
   font-family: Arial;
   border: none;
   padding: 13px 30px;
+  box-shadow: 0px 6px 12px 0px rgba(113, 63, 255, 0.25);
 }
 
 .button {
@@ -163,6 +164,7 @@ body {
   font-weight: 400;
   line-height: 19.2px;
   color: #0a1629;
+  overflow-wrap: break-word;
 }
 
 .priority-title {
@@ -223,6 +225,7 @@ body {
 }
 
 .progress {
+  margin-right: 57px;
   margin-top: 4px;
 }
 @media only screen and (max-width: 600px) {
@@ -279,12 +282,12 @@ body {
 .priority-buttons {
   list-style-type: none;
   display: flex;
-  gap: 13px;
+  gap: 12px;
   margin-top: 10px;
 }
 @media only screen and (max-width: 600px) {
   .priority-buttons {
-    gap: 10px;
+    gap: 12px;
   }
 }
 .priority-buttons li {
@@ -334,6 +337,7 @@ body {
   line-height: 22px;
 }
 .input input {
+  font-family: "Poppins";
   width: 100%;
   background: #ffffff;
   border: 1px solid #d8e0f0;
@@ -346,6 +350,11 @@ body {
   line-height: 22px;
   outline: none;
 }
+@media only screen and (max-width: 600px) {
+  .input input {
+    padding: 14px 12.68px;
+  }
+}
 
 .delete-modal {
   margin: 0 auto;
@@ -354,9 +363,9 @@ body {
 .delete-modal p {
   font-size: 20px;
   font-weight: 600;
-  color: #000000;
   line-height: 1.5;
   text-align: center;
+  color: #0A1629;
 }
 .delete-modal__actions {
   display: flex;
