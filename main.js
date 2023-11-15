@@ -118,6 +118,7 @@ taskList.forEach((task) => {
     progressCircle.style.strokeDashoffset =
       69.115 - (69.115 * task.progress) / 100;
   };
+
   statusButton.textContent = task.status;
 
   taskStatusWrapper.appendChild(statusButton);
@@ -203,6 +204,7 @@ taskTitleInput.addEventListener("input", () => {
   }
 });
 
+
 for (const button of priorityButtons) {
   button.addEventListener("click", function () {
     for (const button of priorityButtons) {
@@ -272,7 +274,7 @@ function displayTask(task) {
       <span class="priority-title">Priority</span>
       <span class="${task.priority}-priority priority">${task.priority}</span>
     </div>
-    <div class="task-status-wrapper">
+    <div class="task-status-wrapper" [data-task-id="${task.id}"]>
       <button class="status" onclick="changeStatus('${task.id}')">
         ${task.status}
       </button>
@@ -348,6 +350,7 @@ const edit_modal = document.getElementById("edit_todo_task");
 const close_edit_modal = document.getElementById("close_edit_modal");
 const edit_task_img = document.querySelectorAll(".img-edit-task");
 const edit_task_form = document.getElementById("edit_task_form");
+const edit_modal_content = document.querySelector(".edit-modal-content");
 btn_edit_task = document.querySelector(".button-edit-task");
 let editingTaskId = null;
 
@@ -568,6 +571,11 @@ editButton.addEventListener("click", () => {
 edit_task_form.addEventListener("submit", function (e) {
   e.preventDefault();
 });
+
+edit_modal.addEventListener("click", closeEditTaskModal);
+edit_modal_content.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 /* ======================================  END EDIT TASK MODAL  ================================================================= */
 
 
@@ -577,6 +585,7 @@ const delete_modal = document.getElementById("delete_todo_task");
 const delete_task_img = document.querySelectorAll(".img-delete-task");
 const agree_delete = document.getElementById("agree_btn_delete");
 const cancle_delete = document.getElementById("cancle_btn_delete");
+const delete_modal_content = document.querySelector(".delete-modal-content");
 let taskIdToDelete = null;
 
 function showdelete(taskId) {
@@ -607,6 +616,7 @@ function changeStatus(taskId) {
       default:
         newStatus = TaskStatus.TODO;
     }
+    // Nếu status là done thì thêm class done-status
     const progressCircle = document.querySelector(
       `[data-task-id="${task.id}"]  .circle-progress`
     );
@@ -628,8 +638,20 @@ function changeStatus(taskId) {
     const statusButton = document.querySelector(
       `[data-task-id="${taskId}"] .status`
     );
+    // const statusButtondiv = document.querySelector(`.task-status-wrapper[data-task-id="${taskId}"]`);
     if (statusButton) {
       statusButton.textContent = newStatus;
+      // Thêm class tương ứng với status
+      if(newStatus === TaskStatus.DONE) {
+        statusButton.classList.add("done-status");
+        statusButton.classList.remove("in-progress-status", "todo-status");
+      } else if (newStatus === TaskStatus.IN_PROGRESS) {
+        statusButton.classList.add("in-progress-status");
+        statusButton.classList.remove("done-status", "todo-status");
+      } else {
+        statusButton.classList.add("todo-status");
+        statusButton.classList.remove("in-progress-status", "done-status");
+      }
     }
   }
 }
@@ -675,5 +697,13 @@ function deleteTask(taskId) {
     }
   }
 }
+
+delete_modal.addEventListener('click', () => {
+  delete_modal.style.display = 'none';
+})
+
+delete_modal_content.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 
 /* =====================================  END DELETE TASK MODAL   ============================================================== */
